@@ -1,12 +1,11 @@
 import { Component } from 'react';
 import { nanoid } from 'nanoid';
 
-import initialState from 'db/contacts.json';
-
 import ContactsForm from 'components/ContactsForm';
 import ContactsList from 'components/ContactsList';
 import ContactsFilter from 'components/ContactsFilter';
 
+import initialState from 'db/contacts.json';
 import { Container, Title } from './App.styled';
 
 class App extends Component {
@@ -14,6 +13,12 @@ class App extends Component {
     contacts: initialState,
     filter: '',
   };
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.contacts !== prevState.contacts) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    }
+  }
 
   addContact = newContact => {
     const isDuplicate = this.state.contacts.find(
