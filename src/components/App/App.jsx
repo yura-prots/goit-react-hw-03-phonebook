@@ -5,7 +5,7 @@ import ContactsForm from 'components/ContactsForm';
 import ContactsList from 'components/ContactsList';
 import ContactsFilter from 'components/ContactsFilter';
 
-import { Container, Title } from './App.styled';
+import { Container, Wrapper, Title } from './App.styled';
 // import initialState from 'db/contacts.json';
 
 class App extends Component {
@@ -76,12 +76,17 @@ class App extends Component {
         <Title>Phonebook</Title>
         <ContactsForm onAdd={this.addContact} />
 
-        <Title>Contacts</Title>
-        <ContactsFilter filter={filter} toFind={this.findContact} />
-        <ContactsList
-          contacts={visibleContacts}
-          toDelete={this.deleteContact}
-        />
+        {contacts.length > 0 && (
+          <Wrapper>
+            <Title>Contacts</Title>
+            <ContactsFilter filter={filter} toFind={this.findContact} />
+
+            <ContactsList
+              contacts={visibleContacts}
+              toDelete={this.deleteContact}
+            />
+          </Wrapper>
+        )}
       </Container>
     );
   }

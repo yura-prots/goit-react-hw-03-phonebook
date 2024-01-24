@@ -20,6 +20,12 @@ export const Container = styled.div`
   background-size: cover;
 `;
 
+export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
 export const Title = styled.h2`
   display: block;
   font-weight: 700;
