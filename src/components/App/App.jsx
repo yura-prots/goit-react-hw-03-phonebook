@@ -5,14 +5,23 @@ import ContactsForm from 'components/ContactsForm';
 import ContactsList from 'components/ContactsList';
 import ContactsFilter from 'components/ContactsFilter';
 
-import initialState from 'db/contacts.json';
 import { Container, Title } from './App.styled';
+// import initialState from 'db/contacts.json';
 
 class App extends Component {
   state = {
-    contacts: initialState,
+    contacts: [],
     filter: '',
   };
+
+  componentDidMount() {
+    const localContacts = localStorage.getItem('contacts');
+    const parsedContacts = JSON.parse(localContacts);
+
+    if (parsedContacts) {
+      this.setState({ contacts: parsedContacts });
+    }
+  }
 
   componentDidUpdate(prevProps, prevState) {
     if (this.state.contacts !== prevState.contacts) {
