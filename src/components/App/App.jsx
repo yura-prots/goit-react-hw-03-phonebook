@@ -6,7 +6,8 @@ import ContactsList from 'components/ContactsList';
 import ContactsFilter from 'components/ContactsFilter';
 
 import { Container, Wrapper, Title } from './App.styled';
-// import initialState from 'db/contacts.json';
+
+const storageKey = 'contacts';
 
 class App extends Component {
   state = {
@@ -15,7 +16,7 @@ class App extends Component {
   };
 
   componentDidMount() {
-    const localContacts = localStorage.getItem('contacts');
+    const localContacts = localStorage.getItem(storageKey);
     const parsedContacts = JSON.parse(localContacts);
 
     if (parsedContacts) {
@@ -24,8 +25,10 @@ class App extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.state.contacts !== prevState.contacts) {
-      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    const { contacts } = this.state;
+
+    if (contacts !== prevState.contacts) {
+      localStorage.setItem(storageKey, JSON.stringify(contacts));
     }
   }
 
